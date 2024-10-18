@@ -4,14 +4,15 @@ import { useDispatch } from 'react-redux';
 import { addItemsToCart } from './CartSlice';// used to get the reducer function detail to dispatch which product is added to the cart to store.js
 
 const ProductList = () => {
+  const dispatch = useDispatch();
+  const [disabledProducts , setDisabledProducts] = useState([]) // state to store disabled products
+
   const products = [
     { id: 1, name: 'Product A', price: 60 },
     { id: 2, name: 'Product B', price: 75 },
     { id: 3, name: 'Product C', price: 30 },
   ];
-  const dispatch = useDispatch();
-  const [disabledProducts , setDisabledProducts] = useState([]) // state to store disabled products
-
+  
   const handleAddToCart = product => {
     dispatch(addItemsToCart(product));// sends an action to the Redux store to add a product to the cart.
     setDisabledProducts([...disabledProducts , product.id]) // Mark the product as disabled
@@ -23,7 +24,7 @@ const ProductList = () => {
       <ul className="product-list-items">
         {products.map(product => ( //products.map(...) is a JavaScript expression, and in JSX, we can’t write JavaScript code directly without using {}. The curly braces tell React to interpret the contents as JavaScript rather than plain text or HTML.
           <li key={product.id} className='product-list-item'> {/* The key prop allows React to efficiently update and re-render only the items that have changed */}
-          <span>{product.name} - ${product.price}</span> {/* The <span> tag is used simply to wrap the product information for styling and structure purposes */}
+          <span>{product.name} - {product.price}$</span> {/* The <span> tag is used simply to wrap the product information for styling and structure purposes */}
           <button
           /**
            * @param {${}}: used to evaluate a JavaScript expression.
@@ -40,7 +41,6 @@ const ProductList = () => {
           </button>
           </li>
         ))}
-     
       </ul>
     </div>
   );

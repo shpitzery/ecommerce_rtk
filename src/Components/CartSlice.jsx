@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-const initialState = {
-    cartItems: [],
-}
+const initialState = {cartItems: []}
 const CartSlice = createSlice({
     name: 'cart',
     initialState,
@@ -18,28 +16,28 @@ const CartSlice = createSlice({
             }
         },
         removeItemFromCart (state , action) {
-            state.cartItems = state.cartItems.filter(item => item.id !== action.payload.id); // loops through the cartItems array and keeps only the items whose id does not match the id provided in action.payload
+            state.cartItems = state.cartItems.filter(item => item.id !== action.payload); // loops through the cartItems array and keeps only the items whose id does not match the id provided in action.payload
         },
         clearCart (state) { // No action parameter because this operation doesn’t require any specific information or data because it’s a universal action that affects the entire cart, not individual items.
             state.cartItems = [];
         },
         increaseItemQauntity (state , action) {
-            const itemToIncrease = state.cartItems.find(item => item.id === action.payload.id);
+            const itemToIncrease = state.cartItems.find(item => item.id === action.payload);
             if (itemToIncrease) {
                 itemToIncrease.quantity += 1;
             }
         },
         decreaseItemQauntity (state , action) {
-            const itemToDecrease = state.cartItems.find(item => item.id === action.payload.id);
+            const itemToDecrease = state.cartItems.find(item => item.id === action.payload);
             if (itemToDecrease && itemToDecrease.quantity > 1) {
                 itemToDecrease.quantity -= 1;
             }
-        }
+        },
     }
 });
 // export the action creators so they can be imported and used in other parts of the application to dispatch actions to update the Redux state.
 export const { 
-    // When I defined the below functions inside the reducers object of createSlice, Redux Toolkit automatically generates an action creator with the same name. So, the below list is a list of action creators.
+    // When defined the below functions inside the reducers object of createSlice, Redux Toolkit automatically generates an action creator with the same name. So, the below list is a list of action creators.
     addItemsToCart,
     removeItemFromCart,
     clearCart,
