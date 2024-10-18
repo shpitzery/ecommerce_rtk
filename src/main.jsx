@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store from './store.js'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
- <Provider store={store}> {/* supplies the Redux store to all components within its hierarchy by passing store as props. This allows components to access and interact with the Redux store for state management. */}
+<Provider store={store}>
     <App />
     </Provider>
   </React.StrictMode>,
